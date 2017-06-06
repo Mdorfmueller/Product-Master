@@ -10,13 +10,19 @@ var jp = require('jsonpath')
 var express = require('express');
 var app = express();
 
-//Set up npm modules for Swagger UI
+//Set up npm module for Swagger UI
 var swaggerUi = require('swaggerize-ui');
 
 //Endpoint to get master data for all products
 app.get('/products', function(req, res) {
 	fs.readFile(dataFile, 'utf8', function(err, data){
-		res.end(data);
+		var products = JSON.parse(data);
+
+		var result = JSON.parse('{}');
+		result.products = products;
+		result.lastUpdatedAt = Date.now();
+		
+		res.end(JSON.stringify(result));
 	});
 })
 
@@ -25,7 +31,12 @@ app.get('/products/:gtin', function(req, res) {
 	fs.readFile(dataFile, 'utf8', function(err, data){
 		var products = JSON.parse(data);
 		var product = jp.query(products, '$..[?(@.gtin==' + req.params.gtin + ')]');
-		res.end(JSON.stringify(product));
+
+		var result = JSON.parse('{}');
+		result.product = product;
+		result.lastUpdatedAt = Date.now();
+
+		res.end(JSON.stringify(result));
 	});
 })
 

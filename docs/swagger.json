@@ -23,7 +23,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Product"
+                                "$ref": "#/definitions/ProductsResult"
                             }
                         }
                     }
@@ -55,7 +55,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Product"
+                            "$ref": "#/definitions/ProductResult"
                         }
                     }
                 },
@@ -64,7 +64,36 @@
         }
     },
     "definitions": {
-        "Product": {
+        "ProductsResult": {
+            "type": "object",
+            "properties": {
+                "products": {
+                    "type": "array",
+					"items": {
+						"$ref": "#/definitions/Product"
+					},
+					"description": "An array of products"
+                },
+                "lastUpdatedAt": {
+                    "type": "integer",
+					"description": "Indicates when the data was last refreshed / updated (in milliseconds since Jan 1 1970)"
+                }
+			}
+		},
+        "ProductResult": {
+            "type": "object",
+            "properties": {
+                "product": {
+					"$ref": "#/definitions/Product",
+					"description": "Product representing the GTIN passed"
+                },
+                "lastUpdatedAt": {
+                    "type": "integer",
+					"description": "Indicates when the data was last refreshed / updated (in milliseconds since Jan 1 1970)"
+                }
+			}
+		},
+		"Product": {
             "type": "object",
             "properties": {
                 "gtin": {
