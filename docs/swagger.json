@@ -1,0 +1,93 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "v1",
+        "title": "Product Master",
+        "description": "A service that provides product master data from a Content Management System (CMS) or a Product Information Management (PIM) system"
+    },
+    "paths": {
+        "/products": {
+            "get": {
+                "tags": [
+                    "CMS"
+                ],
+                "operationId": "getProducts",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/products/{gtin}": {
+            "get": {
+                "tags": [
+                    "CMS"
+                ],
+                "operationId": "getProductByGtin",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "gtin",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "definitions": {
+        "Product": {
+            "type": "object",
+            "properties": {
+                "gtin": {
+                    "type": "integer",
+					"description": "The Global Trade Item Number for the product"
+                },
+                "brand": {
+                    "type": "string",
+					"description": "The brand of the product"
+                },
+                "name": {
+                    "type": "string",
+					"description": "The name of the product"
+                },
+                "description": {
+                    "type": "string",
+					"description": "Descriptive details of the product"
+                },
+                "bvCode": {
+                    "type": "string",
+					"description": "The Bazaarvoice ID or Code for getting reviews about the product"
+                }
+            }
+        }
+    }
+}
