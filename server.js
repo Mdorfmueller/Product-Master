@@ -23,8 +23,8 @@ app.get('/products', function(req, res) {
 		result.lastUpdatedAt = Date.now();
 		
 		var response = JSON.stringify(result);
-		res.setHeader('Content-Length', response.length);
-		res.setHeader('Content-Type', "application/json");
+		//res.setHeader('Content-Length', response.length);
+		//res.setHeader('Content-Type', "application/json");
 		res.end(response);
 	});
 })
