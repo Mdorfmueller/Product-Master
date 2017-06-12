@@ -22,7 +22,9 @@ app.get('/products', function(req, res) {
 		result.products = products;
 		result.lastUpdatedAt = Date.now();
 		
-		res.end(JSON.stringify(result));
+		var response = JSON.stringify(result);
+		res.setHeader('Content-Length', response.length);
+		res.end(response);
 	});
 })
 
@@ -36,7 +38,9 @@ app.get('/products/:gtin', function(req, res) {
 		result.product = product;
 		result.lastUpdatedAt = Date.now();
 
-		res.end(JSON.stringify(result));
+		var response = JSON.stringify(result);
+		res.setHeader('Content-Length', response.length);
+		res.end(response);
 	});
 })
 
