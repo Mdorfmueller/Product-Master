@@ -24,6 +24,7 @@ app.get('/products', function(req, res) {
 		
 		var response = JSON.stringify(result);
 		res.setHeader('Content-Length', response.length);
+		res.setHeader('Content-Type', "application/json");
 		res.end(response);
 	});
 })
